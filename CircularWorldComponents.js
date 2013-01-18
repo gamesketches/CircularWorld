@@ -9,6 +9,11 @@ Crafty.c("Player", {
 			this.destroy(); // Go to game over later
 		});
 		this.gravity("Ground");
+		this.bind("KeyDown", function() {
+			if(this.isDown('SPACE')) {
+				Crafty.e("Projectile").attr({x: this.x + this.w, y: this.y, w: 25, h: 25}).color("#FF0000");
+			}
+		});
 		}
 	});
 
@@ -22,6 +27,9 @@ Crafty.c("Enemy", {
 	init: function() {
 		this.addComponent("2D,Canvas,Color,Collision");
 		this.collision();
+		this.onHit("Projectile", function() {
+			this.destroy();
+		});
 		this.bind("EnterFrame", function() {
 			if(playerX > this.x)	{
 				this.x++; }
@@ -35,3 +43,18 @@ Crafty.c("Enemy", {
 
 		}
 	});				
+
+Crafty.c("Projectile", {
+	distance: 0,
+	init: function() {
+		this.addComponent("2D, Canvas, Color, Collision");
+		this.collision();
+		this.bind("EnterFrame", function() {
+			this.x += 10;
+			this.distance++;
+			if(this.distance == 20) {
+				this.destroy();
+			}
+		});
+	}
+});
