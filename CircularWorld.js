@@ -4,4 +4,9 @@ window.onload = (function() {
 		HEIGHT = 600;
 
 	Crafty.init(WIDTH, HEIGHT);
- Crafty.background("#000000");});
+	 Crafty.background("#000000");
+
+	Crafty.e("Ground").attr({x: 0, y: 550, w: 1000, h: 50}).color("#888888");
+	Crafty.e("Player").attr({x: 300, y: 300, w: 50, h: 50}).color("#0000FF");
+
+});
