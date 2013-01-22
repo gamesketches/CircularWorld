@@ -48,6 +48,7 @@ window.onload = (function() {
 		playerY = player.y;
 		if(player.x >= ROLLBACK_POINT) {
 			player.x = STARTING_POINT;
+			playerAge = 0.1;
 			for(var i = 0; i < enemies.length; i++) {
 				if(enemies[i].destroyed == false) {
 					enemiesPast.push(enemies[i]);
