@@ -3,7 +3,7 @@ var playerX = 0, playerY = 0;
 Crafty.c("Player", {
 	init: function() {
 		this.addComponent("2D,Canvas,Color,Twoway,Collision,Gravity");
-		this.twoway(10,7.1);
+		this.twoway(10,7);
 		this.collision();
 		this.onHit("Enemy", function() {
 			this.destroy(); // Go to game over later
