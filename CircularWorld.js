@@ -9,6 +9,8 @@ window.onload = (function() {
 	Crafty.init(WIDTH, HEIGHT);
 	 Crafty.background("#000000");
 
+	Crafty.scene("Gameplay", function() {
+
 	// Make Clouds
 	Crafty.e("2D,Canvas,Color").attr({x: 500, y: 400, w: 25, h: 25}).color("#FFFFFF");
 	Crafty.e("2D,Canvas,Color").attr({x: 650, y: 100, w: 25, h: 25}).color("#FFFFFF");
@@ -77,4 +79,17 @@ window.onload = (function() {
 		Crafty.viewport.x = -vpx;
 
 		});
+	});
+
+	Crafty.scene("gameOver", function() {
+		alert(Crafty.viewport.x);
+		Crafty.viewport.x = 500;
+		var textHandler = Crafty.e("2D,Canvas,Text,Keyboard").attr({x: 500, y:300}).text("Press 'r' to restart").textColor("#FF0000");
+		textHandler.bind("KeyDown", function() {
+			if(this.isDown('R')) {
+				Crafty.scene("gameplay"); }
+			});
+		});
+
+	Crafty.scene("Gameplay");
 });

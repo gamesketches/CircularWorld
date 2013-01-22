@@ -6,7 +6,7 @@ Crafty.c("Player", {
 		this.twoway(10,7);
 		this.collision();
 		this.onHit("Enemy", function() {
-			this.destroy(); // Go to game over later
+			Crafty.scene("Gameplay");
 		});
 		this.gravity("Ground");
 		this.bind("KeyDown", function() {
