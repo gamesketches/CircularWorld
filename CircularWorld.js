@@ -13,6 +13,8 @@ window.onload = (function() {
 	var player = Crafty.e("Player").attr({x: STARTING_POINT, y: 300, w: 50, h: 50}).color("#0000FF");
 	Crafty.e("2D,Canvas,Color").attr({x: 1200, y: 500, w: 50, h: 50}).color("#00FF00");
 	var enemies = [];
+	var enemiesPast = [];
+	var zombieEnemies = [];
 	for(var i = 0; i < 8; i++) {
 		enemies[i] = Crafty.e("Enemy").attr({x: 900 + (10 * Crafty.math.randomInt(0, 20)), y: 200 + (10 * Crafty.math.randomInt(0,20)), w: 50, h: 50}).color(enemyColor);
 		}
@@ -35,11 +37,21 @@ window.onload = (function() {
 		if(player.x >= ROLLBACK_POINT) {
 			player.x = STARTING_POINT;
 			for(var i = 0; i < enemies.length; i++) {
-				enemies[i].destroy();
+				if(enemies[i].destroyed == false) {
+					enemiesPast.push(enemies[i]);
+					}
+				else {
+					enemies[i].destroy();
+					}
 				}
 			enemyColor = randomColor("#000000", "#FFFFFF");
 			for(var i = 0; i < 8; i++) {
 				enemies[i] = Crafty.e("Enemy").attr({x: 900 + (10 * Crafty.math.randomInt(0, 20)), y: 200 + (10 * Crafty.math.randomInt(0,20)), w: 50, h: 50}).color(enemyColor);
+				}
+			for(var j = 0; j < enemiesPast.length; j++) {
+				for(var i = 0; i < 8; i++) {
+					zombieEnemies[i] = Crafty.e("Enemy").attr({x: 900 + (100 * j) + (10 * Crafty.math.randomInt(0, 20)), y: 200 + (10 * Crafty.math.randomInt(0,20)), w: 50, h: 50}).color(enemiesPast[j].color);
+				}
 				}
 			}
 		if(player.x <= 500) {
